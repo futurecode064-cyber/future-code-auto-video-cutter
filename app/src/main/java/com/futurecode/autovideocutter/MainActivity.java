@@ -202,7 +202,7 @@ public final class MainActivity extends Activity {
         bar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         bar.setIndeterminate(false);
         bar.setMax(1000);
-        bar.setProgress(0);
+        bar.updateProgressUi(0);
         bar.setProgressTintList(ColorStateList.valueOf(ACCENT));
         progressPanel.addView(bar, new LinearLayout.LayoutParams(-1, dp(11)));
         addSpace(progressPanel, 6);
@@ -421,7 +421,7 @@ public final class MainActivity extends Activity {
         exported.clear();
         renderSaved();
         setBusyControls();
-        bar.setProgress(0);
+        bar.updateProgressUi(0);
         progressLabel.setText("0%");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -487,7 +487,7 @@ public final class MainActivity extends Activity {
                 int state = transformer.getProgress(progressHolder);
                 if (state == Transformer.PROGRESS_STATE_AVAILABLE) {
                     int overall = (int) (((jobIndex + progressHolder.progress / 100f) / jobCount) * 1000);
-                    setProgress(overall);
+                    updateProgressUi(overall);
                 }
             } catch (Exception ignored) {}
             if (busy && transformer != null) pollProgress();
@@ -511,7 +511,7 @@ public final class MainActivity extends Activity {
                 if (out != null) {
                     exported.add(out);
                     jobIndex++;
-                    setProgress((int) ((long) jobIndex * 1000 / jobCount));
+                    updateProgressUi((int) ((long) jobIndex * 1000 / jobCount));
                     renderSaved();
                 }
                 if (cancelRequested) finishJob("Export cancelled. " + exported.size() + " video(s) saved.", false);
@@ -559,9 +559,9 @@ public final class MainActivity extends Activity {
         }
     }
 
-    private void setProgress(int progress) {
+    private void updateProgressUi(int progress) {
         progress = Math.min(1000, Math.max(0, progress));
-        bar.setProgress(progress);
+        bar.updateProgressUi(progress);
         progressLabel.setText(String.format(Locale.US, "%.1f%%", progress / 10.0));
     }
 
@@ -572,7 +572,7 @@ public final class MainActivity extends Activity {
         copying = false;
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setBusyControls();
-        if (success) setProgress(1000);
+        if (success) updateProgressUi(1000);
         messageLabel.setText(msg);
         renderSaved();
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
