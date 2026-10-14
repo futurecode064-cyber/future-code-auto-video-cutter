@@ -1,0 +1,8 @@
+Future Code Auto Video Cutter v1.0.1
+STATUS: Source project created, not compiled APK.
+Verified: ClipPlan Java test on JDK 21 passed; split math 2h / 5min = 24 parts, all time intervals contiguous.
+Not verified: Android/Gradle compilation, real-device video processing, APK installability.
+Reason: Android SDK and Gradle not available; network DNS disabled in environment.
+Next: Run .github/workflows/build-apk.yml on new GitHub repository, or import in Android Studio with JDK17/SDK35/Gradle8.11.1.
+
+As of Oct 14, 2026: GitHub repository futurecode064-cyber/future-code-auto-video-cutter does not exist (404); connected GitHub tool cannot create a repository. Neither GitHub upload nor cloud build has run.
