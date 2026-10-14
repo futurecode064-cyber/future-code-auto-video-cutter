@@ -202,7 +202,7 @@ public final class MainActivity extends Activity {
         bar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         bar.setIndeterminate(false);
         bar.setMax(1000);
-        bar.updateProgressUi(0);
+        bar.setProgress(0);
         bar.setProgressTintList(ColorStateList.valueOf(ACCENT));
         progressPanel.addView(bar, new LinearLayout.LayoutParams(-1, dp(11)));
         addSpace(progressPanel, 6);
@@ -421,7 +421,7 @@ public final class MainActivity extends Activity {
         exported.clear();
         renderSaved();
         setBusyControls();
-        bar.updateProgressUi(0);
+        bar.setProgress(0);
         progressLabel.setText("0%");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -561,7 +561,7 @@ public final class MainActivity extends Activity {
 
     private void updateProgressUi(int progress) {
         progress = Math.min(1000, Math.max(0, progress));
-        bar.updateProgressUi(progress);
+        bar.setProgress(progress);
         progressLabel.setText(String.format(Locale.US, "%.1f%%", progress / 10.0));
     }
 
